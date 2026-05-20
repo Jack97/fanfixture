@@ -27,6 +27,7 @@ export default function PostHogProvider({ children }: { children: React.ReactNod
     if (!key) return;
     posthog.init(key, {
       api_host: host,
+      defaults: "2026-01-30",
       capture_pageview: false, // manual via PageviewTracker
       capture_pageleave: true,
       persistence: "localStorage",
