@@ -59,25 +59,39 @@ export default function ThingsToDoSection({ venue }: { venue: Venue }) {
       <div className="divide-y divide-[var(--color-pitch-border)]">
         {venue.highlights.map((item) => {
           const icon = CATEGORY_ICONS[item.category] ?? "📍";
+          const itemUrl = viatorAffId
+            ? `https://www.viator.com/search/${viatorCity}?q=${encodeURIComponent(item.name)}&pid=${viatorAffId}&mcid=42383&medium=api`
+            : `https://www.viator.com/en-GB/${viatorCity}-tours/`;
           return (
             <div key={item.name} className="px-5 py-4 flex items-start gap-4">
               <span className="text-lg shrink-0 mt-0.5">{icon}</span>
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2 flex-wrap mb-1">
-                  <p
-                    className="text-sm font-bold text-[var(--color-chalk)] uppercase tracking-wide"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {item.name}
-                  </p>
-                  {item.walkMins !== undefined && item.walkMins < 999 && (
-                    <span
-                      className="text-xs text-[var(--color-chalk-dim)]"
-                      style={{ fontFamily: "var(--font-mono)" }}
+                <div className="flex items-center justify-between gap-2 flex-wrap mb-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p
+                      className="text-sm font-bold text-[var(--color-chalk)] uppercase tracking-wide"
+                      style={{ fontFamily: "var(--font-display)" }}
                     >
-                      {item.walkMins} min walk
-                    </span>
-                  )}
+                      {item.name}
+                    </p>
+                    {item.walkMins !== undefined && item.walkMins < 999 && (
+                      <span
+                        className="text-xs text-[var(--color-chalk-dim)]"
+                        style={{ fontFamily: "var(--font-mono)" }}
+                      >
+                        {item.walkMins} min walk
+                      </span>
+                    )}
+                  </div>
+                  <a
+                    href={itemUrl}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="text-xs uppercase tracking-widest text-[var(--color-chalk-dim)] hover:text-[var(--color-grass)] transition-colors shrink-0"
+                    style={{ fontFamily: "var(--font-mono)" }}
+                  >
+                    Book →
+                  </a>
                 </div>
                 <p
                   className="text-sm text-[var(--color-chalk-muted)] leading-relaxed"

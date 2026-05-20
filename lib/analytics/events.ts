@@ -30,7 +30,7 @@ export function trackHotelCtaClick(matchId: number, venueId: string, position: "
 
 export function trackTicketCtaClick(
   matchId: number,
-  platform: "viagogo" | "livefootballtickets" | "ticketmaster",
+  platform: "viagogo" | "livefootballtickets" | "ticketmaster" | "stubhub" | "twickets",
 ) {
   posthog.capture("ticket_cta_click", { match_id: matchId, platform });
 }

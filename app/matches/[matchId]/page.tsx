@@ -7,12 +7,10 @@ import { findTmEvent, tmFromPrice } from "@/lib/tickets/ticketmaster";
 import TicketPricePanel from "@/components/tickets/TicketPricePanel";
 import MatchHero from "@/components/matches/MatchHero";
 import StickyMobileCTA from "@/components/matches/StickyMobileCTA";
-import RecentResults from "@/components/matches/RecentResults";
-import HeadToHead from "@/components/matches/HeadToHead";
-import MatchNews from "@/components/matches/MatchNews";
 import NearbyFixtures from "@/components/matches/NearbyFixtures";
-import TripPlanner from "@/components/trip/TripPlanner";
+import MatchJourney from "@/components/matches/MatchJourney";
 import MatchStructuredData from "@/components/seo/MatchStructuredData";
+import MatchBuzz from "@/components/matches/MatchBuzz";
 
 export const revalidate = 3600;
 
@@ -61,40 +59,19 @@ export default async function MatchDetailPage({
 
       <MatchHero match={match} />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 -mt-16 pb-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-
-          {/* ── Main column ── */}
-          <div className="lg:col-span-2 flex flex-col gap-5 min-w-0">
-            <section id="tickets" className="scroll-mt-28">
-              <TicketPricePanel match={match} tmEvent={tmEvent} />
-            </section>
-
-            {/* On mobile: show form + news between tickets and the trip planner */}
-            <div id="form" className="flex flex-col gap-5 lg:hidden scroll-mt-28">
-              <HeadToHead match={match} />
-              <RecentResults match={match} />
-            </div>
-            <div id="news" className="lg:hidden scroll-mt-28">
-              <MatchNews match={match} />
-            </div>
-
-            <section id="plan" className="scroll-mt-28">
-              <TripPlanner match={match} />
-            </section>
-          </div>
-
-          {/* ── Sidebar (desktop only for form/news) ── */}
-          <div className="flex flex-col gap-5 lg:sticky lg:top-28 lg:self-start min-w-0">
-            <div className="hidden lg:flex lg:flex-col lg:gap-5">
-              <HeadToHead match={match} />
-              <RecentResults match={match} />
-              <MatchNews match={match} />
-            </div>
-            <NearbyFixtures currentMatch={match} />
-          </div>
-
-        </div>
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 -mt-16 pb-8 relative z-10 flex flex-col gap-5">
+        <section id="plan" className="scroll-mt-28 bg-white border border-[var(--color-pitch-border)] rounded-sm p-4 sm:p-6">
+          <MatchJourney
+            match={match}
+            ticketContent={
+              <>
+                <MatchBuzz match={match} tmEvent={tmEvent} />
+                <TicketPricePanel match={match} tmEvent={tmEvent} />
+              </>
+            }
+          />
+        </section>
+        <NearbyFixtures currentMatch={match} />
       </div>
 
       {/* Sticky mobile CTA — tickets primary, hotels secondary */}

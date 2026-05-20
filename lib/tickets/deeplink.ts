@@ -1,6 +1,6 @@
 import type { Match } from "@/lib/football-api/types";
 
-export type TicketPlatform = "viagogo" | "livefootballtickets" | "ticketmaster";
+export type TicketPlatform = "viagogo" | "livefootballtickets" | "ticketmaster" | "stubhub" | "twickets";
 
 // ─── LiveFootballTickets slug maps ────────────────────────────────────────────
 
@@ -99,6 +99,20 @@ export function buildTicketmasterLink(match: Match, tmEventUrl?: string | null):
   return `https://www.ticketmaster.co.uk/search?${params.toString()}`;
 }
 
+// ─── StubHub ──────────────────────────────────────────────────────────────────
+
+export function buildStubHubLink(match: Match): string {
+  const q = encodeURIComponent(`${match.homeTeam.name} tickets`);
+  return `https://www.stubhub.co.uk/search?q=${q}`;
+}
+
+// ─── Twickets ─────────────────────────────────────────────────────────────────
+
+export function buildTwicketsLink(match: Match): string {
+  const q = encodeURIComponent(match.homeTeam.name);
+  return `https://www.twickets.live/app/catalog/search?q=${q}&countryCode=GB`;
+}
+
 // ─── Combined ─────────────────────────────────────────────────────────────────
 
 export function buildTicketLinks(
@@ -109,5 +123,7 @@ export function buildTicketLinks(
     ticketmaster: buildTicketmasterLink(match, tmEventUrl),
     livefootballtickets: buildLiveFootballTicketsLink(match),
     viagogo: buildViagogoLink(match),
+    stubhub: buildStubHubLink(match),
+    twickets: buildTwicketsLink(match),
   };
 }

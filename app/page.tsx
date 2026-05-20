@@ -40,8 +40,8 @@ export default function HomePage() {
                 Match.
               </h1>
               <p className="text-[var(--color-chalk-muted)] max-w-sm leading-relaxed">
-                Search Premier League and Championship fixtures by city, then book a hotel
-                minutes from the stadium.
+                The away day planner for English football. Compare ticket prices, sort your
+                travel, book a hotel near the ground, and find things to do in the city.
               </p>
 
               <p
@@ -104,22 +104,27 @@ export default function HomePage() {
           >
             How It Works
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 num: "01",
-                title: "Find Your Match",
-                body: "Search by city and date to see upcoming fixtures near you.",
+                title: "Get Tickets",
+                body: "Compare prices across Ticketmaster, Viagogo, StubHub and more in one place.",
               },
               {
                 num: "02",
-                title: "Pick a Game",
-                body: "Browse home fixtures with stadium details and kickoff times.",
+                title: "Sort Your Travel",
+                body: "Find flights and trains to the city, with links to book in seconds.",
               },
               {
                 num: "03",
                 title: "Book Your Stay",
-                body: "One click to find hotels within walking distance of the ground.",
+                body: "Hotels within walking distance of the ground — filtered by check-in date.",
+              },
+              {
+                num: "04",
+                title: "Explore the City",
+                body: "Discover fan pubs, local attractions, and things to do on match day.",
               },
             ].map((step) => (
               <div key={step.num}>

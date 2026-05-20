@@ -13,15 +13,18 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: "FanFixture — Find UK Football Matches & Book Hotels",
+    default: "FanFixture — The Away Day Planner for English Football",
     template: "%s | FanFixture",
   },
   description:
-    "Find Premier League and Championship football matches near you. Book hotels close to the stadium for your perfect football trip.",
+    "The away day planner for English football. Compare ticket prices, sort your travel, book a hotel near the ground, and discover what to do in the city.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanfixture.co.uk"),
   openGraph: {
     type: "website",
     siteName: "FanFixture",
+  },
+  other: {
+    "impact-site-verification": "e835eaad-c817-4347-bd8b-36a26223405f",
   },
 };
 

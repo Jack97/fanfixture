@@ -5,7 +5,7 @@ import { trackTicketCtaClick } from "@/lib/analytics/events";
 interface Props {
   href: string;
   matchId: number;
-  platform: "ticketmaster" | "livefootballtickets" | "viagogo";
+  platform: "ticketmaster" | "livefootballtickets" | "viagogo" | "stubhub" | "twickets";
   label: string;
   variant: "primary" | "ghost";
 }
