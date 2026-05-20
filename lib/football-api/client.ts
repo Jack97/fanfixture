@@ -57,17 +57,8 @@ export async function getMatchesByCity(
 
 /** Fetch a single match by football-data.org numeric ID. */
 export async function getMatchById(matchId: number): Promise<Match | null> {
-  const res = await fetch(`${BASE_URL}/matches/${matchId}`, {
-    headers: footballHeaders(),
-    next: { revalidate: 3600, tags: [`match-${matchId}`] },
-  });
-
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`football-data.org error: ${res.status}`);
-
-  const raw = await res.json();
-  const mapped = mapRawMatches([raw]);
-  return mapped[0] ?? null;
+  const all = await getAllScheduledMatches();
+  return all.find((m) => m.id === matchId) ?? null;
 }
 
 /** Get next N days of scheduled matches for static param generation. */
