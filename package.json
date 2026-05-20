@@ -1,5 +1,5 @@
 {
-  "name": "footytrip",
+  "name": "fanfixture",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "fast-xml-parser": "^5.8.0",
+    "gray-matter": "^4.0.3",
     "next": "16.2.6",
+    "next-mdx-remote": "^6.0.0",
+    "posthog-js": "^1.374.2",
+    "posthog-node": "^5.34.5",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

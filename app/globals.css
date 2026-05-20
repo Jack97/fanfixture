@@ -1,26 +1,188 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Surfaces — warm paper */
+  --color-pitch-black: #f8f6f2;
+  --color-pitch-dark: #f0ece5;
+  --color-pitch-card: #e9e4db;
+  --color-pitch-border: #d4cec4;
+
+  /* Forest green — accessible on light backgrounds */
+  --color-grass: #1a5c35;
+  --color-grass-dim: #0f3820;
+  --color-grass-glow: #246f40;
+
+  /* Amber — accessible on light backgrounds */
+  --color-ember: #8f4a00;
+  --color-ember-bright: #a85800;
+  --color-ember-muted: #fdf3e6;
+
+  /* Text — dark on light */
+  --color-chalk: #18170f;
+  --color-chalk-muted: #504c44;
+  --color-chalk-dim: #6e6860;
+
+  /* Accent */
+  --color-live: #bf1c0a;
+
+  /* Fonts */
+  --font-display: var(--font-outfit), system-ui, sans-serif;
+  --font-body: var(--font-outfit), system-ui, sans-serif;
+  --font-mono: var(--font-outfit), system-ui, sans-serif;
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  --animate-fade-up: fadeUp 0.45s ease-out forwards;
+  --animate-slide-in: slideIn 0.35s ease-out forwards;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    background-color: var(--color-pitch-black);
+    color: var(--color-chalk);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :focus-visible {
+    outline: 2px solid var(--color-grass);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .pitch-texture {
+    background-image: radial-gradient(
+      ellipse 80% 60% at 65% 45%,
+      rgba(26, 92, 53, 0.05) 0%,
+      transparent 65%
+    );
+  }
+
+  /* Primary CTA */
+  .btn-ember {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-grass);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    padding: 0.625rem 1.25rem;
+    border-radius: 5px;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn-ember:hover {
+    background-color: var(--color-grass-dim);
+    box-shadow: 0 2px 10px rgba(26, 92, 53, 0.22);
+  }
+
+  .btn-ember-pulse {}
+
+  /* Blog prose */
+  .prose-fanfixture {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--color-chalk);
+  }
+
+  .prose-fanfixture p {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-fanfixture h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-chalk);
+    margin-top: 2.5rem;
+    margin-bottom: 0.875rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-pitch-border);
+  }
+
+  .prose-fanfixture h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-chalk);
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-fanfixture strong {
+    color: var(--color-chalk);
+    font-weight: 600;
+  }
+
+  .prose-fanfixture ul {
+    list-style: none;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--color-pitch-dark);
+    border-left: 3px solid var(--color-grass);
+    border-radius: 0 5px 5px 0;
+  }
+
+  .prose-fanfixture ul li {
+    font-size: 0.9375rem;
+    color: var(--color-chalk);
+    line-height: 1.65;
+    padding: 0.2rem 0 0.2rem 1.25rem;
+    position: relative;
+  }
+
+  .prose-fanfixture ul li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--color-grass);
+    font-weight: 600;
+  }
+
+  .prose-fanfixture a {
+    color: var(--color-grass);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 92, 53, 0.35);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+
+  .prose-fanfixture a:hover {
+    text-decoration-color: var(--color-grass);
+  }
+
+  .competition-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-chalk-muted);
+    background-color: var(--color-pitch-card);
+    border: 1px solid var(--color-pitch-border);
+    border-radius: 9999px;
+    padding: 0.2rem 0.625rem;
+    white-space: nowrap;
+  }
 }
